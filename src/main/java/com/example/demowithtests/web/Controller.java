@@ -251,7 +251,7 @@ public class Controller {
         LocalDateTime timeStart = LocalDateTime.now();
         log.info("Controller -> employeeMassPatchUpdate() method start: time={}", timeStart);
 
-//        employeeService.generateEntity(quantity, clear);
+        employeeService.massTestUpdate();
 
         LocalDateTime timeStop = LocalDateTime.now();
         log.info("Controller -> employeeMassPatchUpdate() method start: time={}", timeStop);

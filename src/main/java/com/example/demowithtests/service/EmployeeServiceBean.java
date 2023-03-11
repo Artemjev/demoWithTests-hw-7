@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -257,14 +258,21 @@ public class EmployeeServiceBean implements EmployeeService {
     public void generateEntity(Integer quantity, Boolean clear) {
         if (clear) employeeRepository.deleteAll();
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        List<Employee> employees = new ArrayList<>(1000);
 
-    }
+        for (int i = 0; i < quantity; i++) {
+            employees.add(Employee.builder()
+                    .name("Name" + i)
+                    .email("artemjev.mih@gmail.com")
+                    .build());
+        }
+        employeeRepository.saveAll(employees);
+  }
 
     @Override
     public void massTestUpdate() {
         List<Employee> employees = employeeRepository.findAll();
-        employees.forEach(employee -> employee.setName(employee.getName() + " test"));
+        employees.forEach(employee -> employee.setName(LocalDateTime.now().toString()));
         employeeRepository.saveAll(employees);
     }
 
